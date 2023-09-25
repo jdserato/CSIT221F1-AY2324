@@ -1,12 +1,21 @@
 #include <iostream>
 #include "arraylist.h"
 using namespace std;
+struct foo {
+	int *a;
+	char ch, ch2;
+	int i;
+////	char ch2;
+};
+
 int main() {
+	cout << "Size of foo: " << sizeof(foo) << endl;
 	int *array = (int*) malloc(5 * sizeof(int));
 	cout << "Array is " << array << endl;
 	int* new_array = (int*) realloc(array, 10*sizeof(int));
 	
-	List* list = new ArrayList();
+	ArrayList* list = new ArrayList();
+//	cout << "List capacity:" << list->capacity << endl;
 	int n;
 	char op;
 	do {
@@ -23,6 +32,11 @@ int main() {
 				cin >> n;
 				list->remove(n);
 				break;
+			case 'R':
+				cin >> n;
+				cout << "Removed " << list->removeAll(n) << " stuffs";
+				break;
+				
 		}
 	} while (op != 'x');
 	list->add(13);

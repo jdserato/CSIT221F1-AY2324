@@ -4,11 +4,25 @@
 using namespace std;
 
 class ArrayList : public List {
-	public:
 	int* array = (int*) calloc( capacity , sizeof(int) );
 	int capacity = 5;
 	int size = 0;
 	
+	int removeOne(int num) {
+		for (int i = 0; i < size; i++) {
+			if (array[i] == num) {
+				for (int j = i+1; j < size; j++) {
+					array[j-1] = array[j];
+				}
+				array[size-1] = 0;
+				size--;
+				return i+1;
+			} 
+		}
+		return -1;
+	}
+	
+	public:
 	ArrayList() {
 		capacity = 5;
 		array = (int*) calloc( capacity , sizeof(int) );
@@ -55,6 +69,23 @@ class ArrayList : public List {
 		}
 		return -1;
 	}
+	
+	int removeAll(int num) {
+		int ctr = 0;
+		while (removeOne(num) != -1) {
+			ctr++;
+		}
+		
+				if (size <= 0.6 * capacity) {
+					capacity *= 0.8;
+					if (capacity < 5) {
+						capacity = 5;
+					}
+					array = (int*) realloc(array, capacity * sizeof(int) );
+				}
+		return ctr;
+	}
+	
 	// TIME REMAINING: 0:00 MINUTE 
 	void print() {
 		cout << "Size: " << size << endl;
