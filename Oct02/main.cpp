@@ -6,8 +6,9 @@
 int main(int argc, char** argv) {
 	cout << "Size of one node: " << sizeof(node) << endl;
 	DoublyLL* list = new DoublyLL();
+//	DoublyLL* list = (DoublyLL*) calloc(1, sizeof(DoublyLL));
 	char op;
-	int num;
+	int num, pos;
 	do {
 		cout << "Op: ";
 		cin >> op;
@@ -19,6 +20,14 @@ int main(int argc, char** argv) {
 			case 't':
 				cin >> num;
 				list->addLast(num);
+				break;
+			case '@':
+				cin >> num >> pos;
+				list->addAt(num, pos);
+				break;
+			case 'r':
+				cin >> num;
+				cout << "Removed " << list->remove(num) << endl;
 				break;
 			case 'F':
 				list->removeFirst();

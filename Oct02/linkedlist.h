@@ -7,7 +7,7 @@ class DoublyLL : public List {
 	node *head, *tail;
 	int size;
 	
-public:
+public:	
 	void addFirst(int num) {
 		// STEP 1: Create node
 		node* n = (node*) calloc( 1, sizeof(node) );
@@ -89,7 +89,59 @@ public:
 	}
 	
 	int remove(int num) {
-		
+		node* curr = head;
+		int pos = 1;
+		while (curr) {
+			if (curr->elem == num) {
+				if (pos == 1) {
+					removeFirst();
+					return pos;
+				}
+				if (pos == size) {
+					removeLast();
+					return pos;
+				}
+				node* pred = curr->prev;
+				node* succ = curr->next;
+				pred->next = succ;
+				succ->prev = pred;
+				free(curr);
+				size--;
+				return pos;
+			}
+			curr = curr->next;
+			pos++;
+		}
+	}
+	
+	void addAt(int num, int pos) {
+		if (pos == 1) {
+			return addFirst(num);
+		}
+		if (pos > size) {
+			return addLast(num);
+		}
+		// Step 1: Create node 
+		node* n = (node*) malloc( sizeof(node) ); 
+		n->elem = num;
+		// Step 2: Iterate curr
+		node* curr = head;
+		int ctr = 1;
+		while (ctr < pos) {
+			curr = curr->next;
+			ctr++;
+		}
+		// Step 3: Identify
+		node* pred = curr->prev;
+		node* succ = curr;
+		// Step 4: Set n's ptrs
+		n->next = succ;
+		n->prev = pred;
+		// Step 5: Set pred and succ's ptrs
+		pred->next = n;
+		succ->prev = n;
+		// Step 6: Inc. size
+		size++;
 	}
 	
 	void print() {
