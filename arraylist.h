@@ -29,6 +29,10 @@ class ArrayList : public List {
 		cout << "Address of array: " << array << endl;
 	}
 	
+	void insertLast(int num) {
+		add(num);
+	}
+	
 	void add(int num) {
 		cout << "Adding " << num << endl;
 		if (size >= capacity) {
@@ -70,6 +74,20 @@ class ArrayList : public List {
 		return -1;
 	}
 	
+	int removeLast() {
+		int temp = array[size-1];
+		array[size-1] = 0;
+		size--;
+		if (size <= (2/3.0) * capacity) {
+			capacity *= 0.75;
+			if (capacity < 5) {
+				capacity = 5;
+			}
+			array = (int*) realloc(array, capacity * sizeof(int) );
+		}
+		return temp;
+	}
+	
 	int removeAll(int num) {
 		int ctr = 0;
 		while (removeOne(num) != -1) {
@@ -84,6 +102,10 @@ class ArrayList : public List {
 					array = (int*) realloc(array, capacity * sizeof(int) );
 				}
 		return ctr;
+	}
+	
+	int _size() {
+		return size;
 	}
 	
 	// TIME REMAINING: 0:00 MINUTE 
