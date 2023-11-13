@@ -42,6 +42,21 @@ public:
 		size++;
 	}
 	
+	int removeFirst() {
+		if (!head) {
+			return -1;
+		}
+		int tmp = head->elem;
+		node* n = head->next;
+		free(head);
+		head = n;
+		size--;
+		if (!head) {
+			tail = n;
+		}
+		return tmp;
+	}
+	
 	void add(int num) {
 		addFirst(num);
 	}
@@ -58,6 +73,10 @@ public:
 	
 	int remove(int num) {
 		
+	}
+	
+	int _size() {
+		return size;
 	}
 	
 	void print() {
