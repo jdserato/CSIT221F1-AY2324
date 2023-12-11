@@ -73,6 +73,12 @@ class ArrayList : public List {
 		}
 		return -1;
 	}
+
+	void swap(int ind1, int ind2) {
+		int temp = array[ind1];
+		array[ind1] = array[ind2];
+		array[ind2] = temp;
+	}
 	
 	int removeLast() {
 		int temp = array[size-1];
